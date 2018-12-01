@@ -1,0 +1,33 @@
+[include]
+    #  separate file for username etc
+    path = ~/.gitconfig.local
+
+[core]
+    editor = vim
+    excludesfile = ~/.gitignore
+
+[merge]
+    tool = vimdiff
+
+[color]
+    ui = true
+
+[alias]
+    ls = log --graph --pretty=format:'%C(yellow)%h - %cd %C(reset)| %C(bold blue)[%cn] %C(reset)| %s %C(red)%d%C(reset)' --date=short
+    lsf = log --graph --pretty=format:'%C(yellow)%h %cd %C(reset)| %C(bold blue)[%cn] %C(reset)| %s %C(red)%d%C(reset)' --date=short --name-status
+    lsff = log --graph --pretty=format:'%C(yellow)%h - %cd %C(reset)| %C(bold blue)[%cn] %C(reset)| %s %C(red)%d%C(reset)' --date=short -u
+    # list remote only commits, i.e., commit that are not local
+    lsremote = log --graph --pretty=format:'%C(yellow)%h - %cd %C(reset)| %C(bold blue)[%cn] %C(reset)| %s %C(red)%d%C(reset)' --date=short @{u}...HEAD
+    lsremotef = log --pretty=format:'%C(yellow)%h %cd %C(reset)| %C(bold blue)[%cn] %C(reset)| %s %C(red)%d%C(reset)' --date=short --name-status @{u}...HEAD
+    lsremoteff = log --graph --pretty=format:'%C(yellow)%h - %cd %C(reset)| %C(bold blue)[%cn] %C(reset)| %s %C(red)%d%C(reset)' --date=short -u @{u}...HEAD
+    lsallremote = log --graph --pretty=format:'%C(yellow)%h - %cd %C(reset)| %C(bold blue)[%cn] %C(reset)| %s %C(red)%d%C(reset)' --date=short @{u}
+    alias = !git config --list | sed -n '/^alias/s/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\t=> \\2/p' | sort
+    ba = branch -av
+    diffstage = diff --cached # changes between staging/index area and last commit. what will be commited if you run "git commit" without "-a"
+    diffwdir = diff HEAD # Show difference between working directory and last commit.what you would be committing if you run "git commit -a". If you have all changes staged for commit, then both commands will output the same diffstage diffwtree
+    diffremote = diff origin/master
+    difflastcom = "!f() { git diff --name-status -r "HEAD~$1"; }; f" # show name of files changes in last n commits.. n parameter
+    difflastcomf = "!f() { git diff -r "HEAD~$1"; }; f" # show diff in last n commits.. n parameter
+    filelog = log -u # specify  a file and see its history
+    unstage = reset HEAD # Unstage any files that have been added to the staging area
+    st = status -sb         # smarter status - include tag and branch info

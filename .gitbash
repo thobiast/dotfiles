@@ -1,0 +1,15 @@
+# Include this file from ~/.bashrc
+# bash setup to git
+
+# https://github.com/magicmonty/bash-git-prompt
+# Comands to configure bash-git-prompt:
+# git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
+
+# show the git prompt only if you are in a git repository
+GIT_PROMPT_ONLY_IN_REPO=1
+# git prompt theme
+GIT_PROMPT_THEME=Single_line_Dark
+
+# source the gitprompt
+test -f ~/.bash-git-prompt/gitprompt.sh && source $_
+

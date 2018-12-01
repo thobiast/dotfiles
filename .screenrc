@@ -1,0 +1,68 @@
+# http://www.gnu.org/software/screen/manual/html_node/String-Escapes.html
+# Anything inside {} only changes the text style (colors, bold, underline, etc)
+# %{GK}     : set colors to bright green and bright black
+# %H        : hostname
+# %{WK}     : set colors to bright white and bright black
+# |         : pipe char
+# %-w       : list windows before current window (to include flags add L '%-Lw'
+# %{Wb}     : set colors to bright white and blue
+# [         : '[' char
+# %n%f:%t   : number of window, flags, ':' char and window title (window with focus)
+# ]         : ']' char
+# %{-}      : restores the attributes and colors that were set before the last change was made
+#             ie, back to colors definition of list windows before current one
+# %+w       : list windows after current window (to include flags add L '%+Lw'
+# %=        : make remaining context to the right side
+# %{GK}     : set colors to bright green and bright black
+# %c        : current time HH:MM in 24h format
+# %d/%m/%Y" : day/month number/full year
+
+# Look and feel
+hardstatus alwayslastline
+hardstatus string '%{= kG} %H %{= kw} | %-w %{= bW}[%n%f:%t]%{-}%+w   %= %{G} [%c %d-%m-%Y]'
+caption splitonly "%?%F%{.c.}%?%3n %t%? [%h]%?"
+
+shelltitle "$ |bash"
+
+# the last message is displayed for 4 seconds
+msgwait 4
+
+# no audible bell
+vbell on
+
+# don't display the copyright page
+startup_message off
+
+autodetach      on
+
+# remove some stupid / dangerous key bindings
+bind k
+bind ^k
+bind .
+bind ^\
+bind \\
+bind ^h
+bind h
+bind x
+bind ^x
+bind 'K' kill
+
+# Enables use of shift-PgUp and shift-PgDn
+termcapinfo xterm|xterm-256color|xterms|xs|rxvt ti@:te@
+
+defscrollback 1000000
+
+# split, window resize
+bind '+' resize +1
+bind '-' resize -1
+
+# control-left and control-right switch windows
+#bindkey ^[[1;5D prev
+#bindkey ^[[1;5C next
+
+# shift-left and shift-right switch windows
+bindkey ^[[1;2D prev
+bindkey ^[[1;2C next
+bindkey "\033[1;2D" prev
+bindkey "\033[1;2C" next
+
