@@ -5,7 +5,7 @@ set visualbell           " No beeps
 set hlsearch             " Highlight searches
 set ignorecase           " Use case insensitive search
 set ignorecase smartcase " Use case insensitive search, except when using capital letters
-set incsearch            " Start searching before pressing enter. 
+" set incsearch            " Start searching before pressing enter.
 
 set wildmenu             " Visual autocomplete for command menu
 
