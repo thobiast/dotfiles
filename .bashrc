@@ -9,24 +9,6 @@ test -d "${HOME}/bin" && PATH="$_:$PATH"
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
-# Docker alias
-# ------------
-# Stop all running containers
-alias dstopall='docker stop $(docker ps -q)'
-# Remove all stopped containers
-alias drmstopped='docker rm $(docker ps -q -f status=exited)'
-# Remove all containers. Even the ones running
-alias drmall='docker rm -f $(docker ps -qa)'
-# Remove all images
-alias drmiall='docker rmi $(docker images -q)'
-# Get into a running container. Specify the container ID
-alias dshell='_dshell() { docker exec -ti "$1" /bin/bash; }; _dshell'
-# List IP of all running containers
-alias dip='docker inspect --format "{{.Name}} - {{.NetworkSettings.IPAddress }}" $(docker ps -q)'
-# List all IP, exposed and mapped ports
-alias dtcp='docker inspect --format "{{.Name}} - {{.NetworkSettings.IPAddress }} - {{.Config.ExposedPorts}} - {{.NetworkSettings.Ports}}" $(docker ps -q)'
-# List containers volume mapping
-alias dvol='docker inspect --format "{{.Name}} - {{ range .Mounts }}{{ .Source }} -> {{.Destination}}{{ end }}" $(docker ps -q)'
 # Colors
 # ------
 alias ls='ls --color=auto'
@@ -82,6 +64,10 @@ esac
 
 # Git prompt and aliases
 test -r ~/.gitbash && source $_
+# Openshift oc bash completion
+test -r ~/.oc_bash_completion.sh && source $_
+# Docker alias
+test -r ~/.dockerbash && source $_
 
 # Preserve earlier PROMPT_COMMAND entries
 PROMPT_COMMAND="set_my_ps1;$PROMPT_COMMAND"
