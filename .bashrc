@@ -54,7 +54,13 @@ set_my_ps1()
 	[ "$last_cmd_rc" != "0" ] &&
 		cmd_status="${PS1_COLOR_BRED}\$${PS1_COLOR_RESET}"
 
-	PS1="${MY_PS1}$cmd_status "
+	# If kubeon, then show kubernetes current context on PS1
+	if [ "$KUBE_PS1" == "on" ];
+	then
+		PS1="${MY_PS1}$(kube_ps1)$cmd_status "
+	else
+		PS1="${MY_PS1}$cmd_status "
+	fi
 }
 
 # Dynamic titles for screen
@@ -68,6 +74,8 @@ test -r ~/.gitbash && source $_
 test -r ~/.oc_bash_completion.sh && source $_
 # Docker alias
 test -r ~/.dockerbash && source $_
+# Kubernetes/openshift prompt and alias
+test -r ~/.kubebash && source $_
 
 # Preserve earlier PROMPT_COMMAND entries
 PROMPT_COMMAND="set_my_ps1;$PROMPT_COMMAND"

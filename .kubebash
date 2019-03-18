@@ -1,0 +1,26 @@
+# Customize bash PS1 for Kubernetes / openshift
+#
+# Alias to enable kubernetes PS1 curtomization
+alias kubeon='export KUBE_PS1=on'
+# Alias to disable kubernetes PS1 curtomization
+alias kubeoff='export KUBE_PS1=off'
+
+export KUBE_PS1=off # Default off
+export KUBE_BIN='oc'
+
+kube_ps1()
+{
+    local cluster
+    local namespace
+	local kubecontext
+
+    type "$KUBE_BIN" >/dev/null 2>&1 || return
+
+	kubecontext=$($KUBE_BIN config current-context 2> /dev/null)
+
+	cluster=$(echo "$kubecontext" | sed 's/^[^/]\+\///; s/:.*//')
+	namespace="${kubecontext%%/*}"
+
+    echo " ${PS1_COLOR_GREEN}(${cluster}:${namespace})${PS1_COLOR_RESET}"
+}
+
