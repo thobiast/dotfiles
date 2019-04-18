@@ -23,7 +23,7 @@ filetype indent on       " Load filetype-specific indent files
 filetype on              " File type detection
 
 " Shell defaults
-au FileType sh setlocal autoindent noexpandtab tabstop=4 textwidth=98 softtabstop=4
+au FileType sh setlocal autoindent expandtab tabstop=4 textwidth=98 softtabstop=4
 
 " Dockerfile defaults
 au FileType dockerfile setlocal autoindent expandtab tabstop=4 textwidth=78 softtabstop=4
