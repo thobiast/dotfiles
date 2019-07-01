@@ -46,7 +46,7 @@ au FileType gitcommit setlocal textwidth=72
 au BufNewFile,BufRead *.t2t setlocal ft=txt2tags
 
 " Terraform
-au BufNewFile,BufRead *.tf setlocal ft=terraform
+au BufNewFile,BufRead *.tf setlocal ft=terraform expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 " Always show the status line
 set laststatus=2
