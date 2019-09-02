@@ -68,3 +68,20 @@ map ucl :s/^#//g<CR>:let @/ = ""<CR>
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
+" Add - to word match
+set iskeyword+=-
+"set iskeyword+=.
+
+" ctags - present a list if there are multiple matches instead of jumping
+" to first match
+nnoremap <C-]> g<C-]>
+
+" vim-gitgutter - disable by default
+let g:gitgutter_enabled = 0
+" vim-gitgutter - ctrl g - to show/hide
+map <C-g> :GitGutterToggle<CR>
+
+" ctrl o - to open nerdtree
+map <C-o> :NERDTreeToggle<CR>
+" close vim if the only window left open is a nerdtree
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
