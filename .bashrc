@@ -14,6 +14,9 @@ alias mv='mv -i'
 alias ls='ls --color=auto'
 alias grep='grep --color'
 
+# Readline displays possible tab completions using different colors to indicate their file type
+bind 'set colored-stats on'
+
 # Set the default editor to vim.
 export EDITOR=vim
 
@@ -27,6 +30,9 @@ shopt -s histappend
 shopt -s cmdhist
 # Check window size and update $LINES and $COLUMNS after each command
 shopt -s checkwinsize
+
+# disable ctrl+s (flow control)
+stty -ixon
 
 #############
 # My prompt #
