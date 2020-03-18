@@ -13,6 +13,9 @@ alias mv='mv -i'
 # ------
 alias ls='ls --color=auto'
 alias grep='grep --color'
+# Archlinux pacman
+alias pacman='function _pacs(){ if [ "$1" = "-Ss" ]; then command sudo pacman -Ss $2 | sed "s,^[^ ]\+,\x1b[32m&\x1b[0m,;s, \[installed[ 0-9:._-]*\] *$,\x1b[36m&\x1b[0m,;N;s/\n */ - /"; else
+command sudo pacman --color auto "$@"; fi; unset -f _pacs; }; _pacs'
 
 # Readline displays possible tab completions using different colors to indicate their file type
 bind 'set colored-stats on'
