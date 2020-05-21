@@ -25,7 +25,7 @@
     ba = branch -av
     diffstage = diff --cached # changes between staging/index area and last commit. what will be commited if you run "git commit" without "-a"
     diffwdir = diff HEAD # Show difference between working directory and last commit.what you would be committing if you run "git commit -a". If you have all changes staged for commit, then both commands will output the same diffstage diffwtree
-    diffremote = diff origin/master
+    diffremote = diff @{u}
     difflastcom = "!f() { git diff --name-status -r "HEAD~$1" HEAD; }; f" # show name of files changes in last n commits.. n parameter
     difflastcomf = "!f() { git diff -r "HEAD~$1" HEAD; }; f" # show diff in last n commits.. n parameter
     diffcom = "!f() { git diff --name-status $1^ $1; }; f" # show diff (changes on a specific commit)
