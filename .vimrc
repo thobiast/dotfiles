@@ -46,7 +46,8 @@ au FileType gitcommit setlocal textwidth=72
 au BufNewFile,BufRead *.t2t setlocal ft=txt2tags
 
 " Terraform
-au BufNewFile,BufRead *.tf setlocal ft=terraform expandtab tabstop=2 shiftwidth=2 softtabstop=2
+au BufNewFile,BufRead *.tf  setlocal ft=terraform expandtab tabstop=2 shiftwidth=2 softtabstop=2
+au BufNewFile,BufRead *.hcl setlocal ft=terraform expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 " Always show the status line
 set laststatus=2
@@ -80,6 +81,13 @@ nnoremap <C-]> g<C-]>
 let g:gitgutter_enabled = 0
 " vim-gitgutter - ctrl g - to show/hide
 map <C-g> :GitGutterToggle<CR>
+
+" vim-ale - disable by default
+let g:ale_enabled = 0
+" vim-ale -  increase delay linters run
+let g:ale_lint_delay = 600
+" vim-ale - ctrl l - to show/hide
+map <C-l> :ALEToggle<CR>
 
 " ctrl o - to open nerdtree
 map <C-o> :NERDTreeToggle<CR>
