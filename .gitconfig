@@ -33,3 +33,5 @@
     filelog = log -u # specify  a file and see its history
     unstage = reset HEAD # Unstage any files that have been added to the staging area
     st = status -sb         # smarter status - include tag and branch info
+    baname = symbolic-ref --short HEAD
+    pushup = !git push --set-upstream origin $(git baname)
