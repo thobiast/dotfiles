@@ -1,6 +1,12 @@
-[include]
-    #  separate file for username etc
-    path = ~/.gitconfig.local
+# separate file for username etc
+[includeIf "gitdir:~/dotfiles/"]
+    path = ~/.gitconfig-github
+
+[includeIf "gitdir:~/github/"]
+    path = ~/.gitconfig-github
+
+[includeIf "gitdir:~/repo/"]
+    path = ~/.gitconfig-work
 
 [core]
     editor = vim
