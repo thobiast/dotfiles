@@ -19,3 +19,4 @@ alias dtcp='docker inspect --format "{{.Name}} - {{.NetworkSettings.IPAddress }}
 # List containers volume mapping
 alias dvol='docker inspect --format "{{.Name}} - {{ range .Mounts }}{{ .Source }} -> {{.Destination}}{{ end }}" $(docker ps -q)'
 
+# vim: filetype=bash

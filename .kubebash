@@ -24,3 +24,4 @@ kube_ps1()
     echo " ${PS1_COLOR_GREEN}(${cluster}:${namespace})${PS1_COLOR_RESET}"
 }
 
+# vim: filetype=bash

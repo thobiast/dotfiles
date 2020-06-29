@@ -13,3 +13,4 @@ GIT_PROMPT_THEME=Single_line_Dark
 # source the gitprompt
 test -f ~/.bash-git-prompt/gitprompt.sh && source $_
 
+# vim: filetype=bash
