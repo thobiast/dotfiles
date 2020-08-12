@@ -1,3 +1,7 @@
+--recurse=yes
+--exclude=.git
+--exclude=.tox
+
 --python-kinds=-i
 
 --langdef=terraform
