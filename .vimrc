@@ -49,6 +49,9 @@ au BufNewFile,BufRead *.t2t setlocal ft=txt2tags
 au BufNewFile,BufRead *.tf  setlocal ft=terraform expandtab tabstop=2 shiftwidth=2 softtabstop=2
 au BufNewFile,BufRead *.hcl setlocal ft=terraform expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
+" Change color of tab bar
+hi TabLineSel ctermfg=White ctermbg=DarkCyan cterm=NONE
+
 " Always show the status line
 set laststatus=2
 set statusline =
