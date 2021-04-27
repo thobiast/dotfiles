@@ -1,6 +1,7 @@
 --recurse=yes
 --exclude=.git
 --exclude=.tox
+--exclude=build
 
 --python-kinds=-i
 
