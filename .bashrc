@@ -16,6 +16,14 @@ alias grep='grep --color'
 # Archlinux pacman
 alias pacman='function _pacs(){ if [ "$1" = "-Ss" ]; then command sudo pacman -Ss $2 | sed "s,^[^ ]\+,\x1b[32m&\x1b[0m,;s, \[installed[ 0-9:._-]*\] *$,\x1b[36m&\x1b[0m,;N;s/\n */ - /"; else
 command sudo pacman --color auto "$@"; fi; unset -f _pacs; }; _pacs'
+alias podman='function _podman(){ command sudo podman "$@"; unset -f _podman; }; _podman'
+alias podman-compose='function _podman-compose(){ command sudo podman-compose "$@"; unset -f _podman-compose; }; _podman-compose'
+
+# Lazy
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
 
 # Readline displays possible tab completions using different colors to indicate their file type
 bind 'set colored-stats on'
@@ -59,8 +67,11 @@ prompt_callback()
     if [ -d .terraform ]; then
         tfworkspace="$(command terraform workspace show 2>/dev/null)"
         [ "$tfworkspace" ] &&
-			echo -n "${PS1_COLOR_GREEN} (tf: $tfworkspace)${PS1_COLOR_RESET}"
+            echo -n "${PS1_COLOR_GREEN} (tf: $tfworkspace)${PS1_COLOR_RESET}"
     fi
+
+    [ -n "$OS_PROJECT_NAME" ] &&
+        echo -n "${PS1_COLOR_GREEN}(Openstack: $OS_PROJECT_NAME)${PS1_COLOR_RESET}"
 
     if [ "$KUBE_PS1" == "on" ]; then
         kube_ps1 2> /dev/null || return
@@ -70,21 +81,21 @@ prompt_callback()
 # Customize my PS1
 set_my_ps1()
 {
-	# last command return code
-	local last_cmd_rc=$?
-	local cmd_status='\$'
+    # last command return code
+    local last_cmd_rc=$?
+    local cmd_status='\$'
 
-	# If last command executed on shell return code non-zero
-	# change prompt '$' to red
-	[ "$last_cmd_rc" != "0" ] &&
-		cmd_status="${PS1_COLOR_BRED}\$${PS1_COLOR_RESET}"
+    # If last command executed on shell return code non-zero
+    # change prompt '$' to red
+    [ "$last_cmd_rc" != "0" ] &&
+        cmd_status="${PS1_COLOR_BRED}\$${PS1_COLOR_RESET}"
 
-	PS1="${MY_PS1}$(prompt_callback)$cmd_status "
+    PS1="${MY_PS1}$(prompt_callback)$cmd_status "
 }
 
 # Dynamic titles for screen
 case "$TERM" in
-	screen*) PROMPT_COMMAND="echo -ne \"\033k\033\0134\""
+    screen*) PROMPT_COMMAND="echo -ne \"\033k\033\0134\""
 esac
 
 # Bash completion
@@ -97,6 +108,14 @@ test -r ~/.oc_bash_completion.sh && source $_
 test -r ~/.dockerbash && source $_
 # Kubernetes/openshift prompt and alias
 test -r ~/.kubebash && source $_
+
+# Load funcoeszz.net
+zzon()
+{
+    export ZZPATH="/home/thobias_trevisan/github/funcoeszz/funcoeszz"  # script
+    export ZZDIR="/home/thobias_trevisan/github/funcoeszz/zz"    # pasta zz/
+    source "$ZZPATH"
+}
 
 # Preserve earlier PROMPT_COMMAND entries
 PROMPT_COMMAND="set_my_ps1;$PROMPT_COMMAND"
