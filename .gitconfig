@@ -45,6 +45,9 @@
     diffcomf = "!f() { git diff $1^ $1; }; f" # show diff (changes on a specific commit)
     filelog = log -u # specify  a file and see its history
     unstage = reset HEAD # Unstage any files that have been added to the staging area
+    undolc = reset --soft HEAD~1 # undo last commit but keep changes in working tree
     st = status -sb         # smarter status - include tag and branch info
+    lstf = ls-tree --full-tree --name-only -r HEAD # list files tracked
+    lstfd = "!f() { git log --pretty=format: --name-only --diff-filter=A | sort - | sed '/^$/d'; }; f" # list files tracked including deleted files
     baname = symbolic-ref --short HEAD
     pushup = !git push --set-upstream origin $(git baname)

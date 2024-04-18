@@ -28,12 +28,22 @@ alias .....="cd ../../../.."
 # Readline displays possible tab completions using different colors to indicate their file type
 bind 'set colored-stats on'
 
+# Make Tab autocomplete regardless of filename case
+set completion-ignore-case on
+
 # Set the default editor to vim.
 export EDITOR=vim
+# Tell grep to highlight matches
+export GREP_OPTIONS='-color=auto'
+
+# openstack fit the table to the display width
+export CLIFF_FIT_WIDTH=1
 
 # History
-export HISTSIZE=100000
+export HISTSIZE=-1
+export HISTFILESIZE=-1
 export HISTCONTROL=ignoreboth   # ignoredups and ignorespace
+export HISTTIMEFORMAT="%d/%m/%y %T "
 # Append commands to the bash command history file (~/.bash_history)
 # instead of overwriting it.
 shopt -s histappend
