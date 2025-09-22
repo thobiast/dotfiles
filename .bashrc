@@ -1,5 +1,7 @@
 # Add ~/bin to PATH
-test -d "${HOME}/bin" && PATH="$_:$PATH"
+if [ -d "$HOME/bin" ] && [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
+    PATH="$HOME/bin:$PATH"
+fi
 
 #########
 # Alias #
@@ -18,6 +20,7 @@ alias pacman='function _pacs(){ if [ "$1" = "-Ss" ]; then command sudo pacman -S
 command sudo pacman --color auto "$@"; fi; unset -f _pacs; }; _pacs'
 alias podman='function _podman(){ command sudo podman "$@"; unset -f _podman; }; _podman'
 alias podman-compose='function _podman-compose(){ command sudo podman-compose "$@"; unset -f _podman-compose; }; _podman-compose'
+alias so='while read filename; do source $filename < /dev/tty; done < <(find ~/openstack/ -type f | fzf -i +s --exact --tac)'
 
 # Lazy
 alias ..="cd .."
@@ -38,6 +41,9 @@ export GREP_OPTIONS='-color=auto'
 
 # openstack fit the table to the display width
 export CLIFF_FIT_WIDTH=1
+#export OS_COMPUTE_API_VERSION=2.74
+#export OS_VOLUME_API_VERSION=3.27
+#export OS_HA_API_VERSION=1.2
 
 # History
 export HISTSIZE=-1
@@ -83,9 +89,13 @@ prompt_callback()
     [ -n "$OS_PROJECT_NAME" ] &&
         echo -n "${PS1_COLOR_GREEN}(Openstack: $OS_PROJECT_NAME)${PS1_COLOR_RESET}"
 
+    [ "$VIRTUAL_ENV" ] && echo -n "(venv: $(basename $VIRTUAL_ENV))"
+
     if [ "$KUBE_PS1" == "on" ]; then
         kube_ps1 2> /dev/null || return
     fi
+
+
 }
 
 # Customize my PS1
@@ -122,8 +132,8 @@ test -r ~/.kubebash && source $_
 # Load funcoeszz.net
 zzon()
 {
-    export ZZPATH="/home/thobias_trevisan/github/funcoeszz/funcoeszz"  # script
-    export ZZDIR="/home/thobias_trevisan/github/funcoeszz/zz"    # pasta zz/
+    export ZZPATH="$HOME/github/funcoeszz/funcoeszz"  # script
+    export ZZDIR="$HOME/github/funcoeszz/zz"          # pasta zz/
     source "$ZZPATH"
 }
 

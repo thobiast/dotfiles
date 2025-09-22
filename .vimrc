@@ -94,5 +94,10 @@ map <C-l> :ALEToggle<CR>
 
 " ctrl o - to open nerdtree
 map <C-o> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
 " close vim if the only window left open is a nerdtree
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" https://vimawesome.com/plugin/nerdtree-red
+" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
